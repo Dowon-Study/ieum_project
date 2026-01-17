@@ -1,0 +1,365 @@
+/* src/components/LoadingPage.css - 수정된 버전 */
+
+.loading-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  z-index: 20;
+  position: relative;
+}
+
+.logo {
+  width: 100px;
+  height: auto;
+  flex-shrink: 0;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #555;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: #e8843c;
+}
+
+.loading-content {
+  position: relative;
+  width: 100%;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}
+
+/* src/components/LoadingPage.css 추가/수정분 */
+.progress-bar {
+  width: 100%;
+  height: 12px;
+  background: #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden; /* 게이지가 밖으로 나가지 않게 */
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #646cff 0%, #7c4dff 100%);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(100, 108, 255, 0.5);
+}
+
+.status-item.completed {
+  color: #4caf50;
+  font-weight: 600;
+}
+
+.status-item.loading {
+  color: #646cff;
+  font-weight: 600;
+}
+
+.status-item.waiting {
+  color: #aaa;
+}
+.text-area {
+  position: absolute;
+  left: 5%;
+  top: 45%;
+  transform: translateY(-50%);
+  width: 45%;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.text-area h2 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.3;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+/* 검색어 표시 스타일 */
+.search-prompt-display {
+  width: 100%;
+  max-width: 420px;
+  /* 너비 제한 */
+  margin: 1rem 0;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 8px;
+  border-left: 4px solid #e8843c;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.search-label {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0 0 0.5rem 0;
+  font-weight: 500;
+}
+
+.search-prompt {
+  font-size: 1rem;
+  color: #333;
+  margin: 0;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* 진행률 섹션 */
+.progress-section {
+  width: 100%;
+  max-width: 420px;
+  /* 너비 제한 */
+  margin: 1rem 0;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  border: 1px solid rgba(232, 132, 60, 0.2);
+}
+
+.progress-bar-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.progress-bar {
+  flex-grow: 1;
+  height: 8px;
+  background: #e9ecef;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #e8843c, #f39c12);
+  border-radius: 4px;
+  transition: width 0.5s ease;
+  position: relative;
+}
+
+.progress-fill::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent);
+  animation: shimmer 2s infinite;
+}
+
+.progress-text {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #e8843c;
+  min-width: 60px;
+  text-align: right;
+}
+
+.overall-status {
+  font-size: 0.85rem;
+  color: #666;
+  margin: 0;
+  text-align: center;
+}
+
+.loading-status-panel {
+  width: 100%;
+  max-width: 420px;
+  /* 너비 제한 */
+  background: #FFFFFF;
+  border-radius: 12px;
+  padding: 1.25rem;
+  /* 패딩 약간 줄임 */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid #F0EBE3;
+}
+
+.loading-status-panel h4 {
+  margin: 0 0 1rem 0;
+  color: #333;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: left;
+}
+
+.status-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  /* 아이템 간격 줄임 */
+}
+
+.status-item {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  /* 내부 패딩 줄임 */
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  border: 1px solid #F0EBE3;
+  background: #F8F5F0;
+  color: #A8A093;
+  font-weight: 500;
+}
+
+.status-item.loading {
+  border-color: rgba(232, 132, 60, 0.3);
+  background: #FFF9F3;
+  color: #E8843C;
+  font-weight: 600;
+  text-align: center;
+}
+
+.status-item.completed {
+  background: #E8843C;
+  border-color: #E8843C;
+  color: #FFFFFF;
+  font-weight: 600;
+  text-align: center;
+}
+
+.status-item.error {
+  background: #F8D7DA;
+  border-color: #F5C6CB;
+  color: #721C24;
+}
+
+.status-content {
+  flex-grow: 1;
+}
+
+.status-label {
+  font-size: 1.5rem;
+  /* 폰트 크기 줄임 */
+}
+
+/* 지도 영역 */
+.map-area {
+  position: absolute;
+  top: 0px;
+  right: 0;
+  left: 550px;
+  width: 60%;
+  height: 100%;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  margin-left: 100px;
+}
+
+.map-container {
+  position: relative;
+  width: 80%;
+  height: 80%;
+  /* transform: translateX(30%); */
+}
+
+.map-background,
+.map-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: auto;
+  z-index: 1;
+}
+
+/* 애니메이션 */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@media (max-width: 1024px) {
+  .text-area {
+    left: 2rem;
+    width: 50%;
+  }
+
+  .map-area {
+    width: 55%;
+  }
+}
+
+@media (max-width: 768px) {
+  .loading-content {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .text-area {
+    position: relative;
+    width: 90%;
+    left: auto;
+    top: auto;
+    transform: none;
+    align-items: center;
+    text-align: center;
+  }
+
+  .map-area {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.15;
+    z-index: -1;
+    transform: none;
+  }
+
+  .map-container {
+    transform: none;
+  }
+
+  .loading-status-panel {
+    margin-top: 1.5rem;
+    width: 100%;
+    max-width: 420px;
+    /* 모바일에서도 너비 제한 */
+  }
+
+  .search-prompt-display,
+  .progress-section {
+    width: 100%;
+    max-width: 420px;
+    /* 모바일에서도 너비 제한 */
+    text-align: left;
+  }
+}

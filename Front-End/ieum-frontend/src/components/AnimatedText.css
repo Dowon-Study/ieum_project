@@ -1,0 +1,12 @@
+/* src/components/AnimatedText.css */
+
+.animated-loading-text {
+    font-size: clamp(2rem, 3vw, 1.5rem);
+    /* 폰트 크기 (기존 LoadingPage.css와 동일하게) */
+    font-weight: 700;
+    /* 폰트를 굵게 (bolder) */
+    line-height: 1.3;
+    margin-bottom: 1rem;
+    color: #333;
+    white-space: nowrap;
+}

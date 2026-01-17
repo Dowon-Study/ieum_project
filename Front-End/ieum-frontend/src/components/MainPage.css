@@ -1,0 +1,736 @@
+/* src/components/MainPage.css */
+
+/* 배경 SVG를 위한 스타일 추가  */
+.background-container {
+  position: fixed;
+  /* 부모 요소를 기준으로 위치를 잡음 */
+  bottom: 0;
+  /* 화면 맨 아래에 배치 */
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: -1;
+  /* 다른 모든 요소들보다 뒤로 보냄 */
+
+  /* 너무 튀지 않도록 약간 투명하게 만듦 */
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.background-container svg {
+  width: 100%;
+  min-width: 1400;
+  height: auto;
+  display: block;
+}
+
+.main-container {
+  margin: 0 auto;
+  padding: 2rem;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.logo-container {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+}
+
+.logo {
+  width: 300px;
+  height: auto;
+  flex-shrink: 0;
+}
+
+.slogan {
+  position: absolute;
+  left: 105px;
+  bottom: 1px;
+  width: 200px;
+  height: auto;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #555;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: #e8843c;
+}
+
+.content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.content h1 {
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  line-height: 1.25;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.content p {
+  font-size: 1.25rem;
+  color: #666;
+  margin-top: 10px;
+}
+
+.prompt-wrapper {
+  width: 100%;
+  max-width: 750px;
+  margin-top: 2.5rem;
+  border-radius: 12px;
+}
+
+.prompt-placeholder {
+  width: 100%;
+  background-color: white;
+  color: #e8843c;
+  border: 2px solid #e8843c;
+  border: none;
+  border-radius: 12px;
+  padding: 1.5rem;
+  font-size: 1.4rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(232, 132, 60, 0.3);
+}
+
+.prompt-placeholder:hover {
+  background-color: #d6732a;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(232, 132, 60, 0.4);
+}
+
+.prompt-placeholder:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.enter-icon {
+  font-size: 2rem;
+  transition: transform 0.2s ease;
+}
+
+.prompt-placeholder:hover .enter-icon {
+  transform: translateX(4px);
+}
+
+.prompt-form {
+  position: relative;
+  width: 100%;
+}
+
+.prompt-input {
+  width: 100%;
+  height: 150px;
+  border: 2px solid #e8843c;
+  border-radius: 12px;
+  padding: 1.5rem;
+  padding-right: 80px;
+  padding-bottom: 3rem;
+  font-size: 1.2rem;
+  resize: none;
+  background-color: #fff;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  line-height: 1.5;
+  /* Firefox 스크롤바 스타일 */
+  scrollbar-width: thin;
+  scrollbar-color: #e8843c #ffffff;
+}
+
+/* Webkit(크롬, 엣지, 사파리) 스크롤바 스타일 */
+.prompt-input::-webkit-scrollbar {
+  width: 16px;
+  /* 스크롤바 전체 너비 (여백 포함) */
+}
+
+.prompt-input::-webkit-scrollbar-track {
+  background-color: #ffffff;
+  /* 트랙 배경은 흰색으로 하여 입력창과 일치시킴 */
+  border-radius: 12px;
+  /* 입력창과 동일한 radius */
+}
+
+.prompt-input::-webkit-scrollbar-thumb {
+  background-color: #e8843c;
+  /* 스크롤바 막대 색상 */
+  border-radius: 10px;
+  border: 8px solid transparent;
+  /* 막대 주변 투명 여백 */
+  background-clip: content-box;
+
+  margin-right: 10px;
+}
+
+.prompt-input::-webkit-scrollbar-thumb:hover {
+  background-color: #d6722a;
+}
+
+/* 스크롤바와 내용이 겹치는 모서리 부분 투명 처리 */
+.prompt-input::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+.prompt-input:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(232, 132, 60, 0.3);
+  border-color: #e8843c;
+}
+
+.prompt-input.error {
+  border-color: #dc3545;
+  background-color: #fff5f5;
+}
+
+.prompt-input.error:focus {
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.3);
+  border-color: #dc3545;
+}
+
+.prompt-input.submitting {
+  background-color: #f8f9fa;
+  cursor: wait;
+}
+
+.send-button {
+  position: absolute;
+  right: 20px;
+  bottom: 50px;
+  background-color: #e8843c;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.send-button:hover:not(.disabled) {
+  background-color: #d6732a;
+  transform: translateY(-1px);
+}
+
+.send-button:active,
+.send-button.active {
+  transform: translateY(2px);
+  background-color: #c56424;
+}
+
+.send-button.disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.send-button.loading {
+  background-color: #6c757d;
+  cursor: wait;
+}
+
+.send-button.loading::after {
+  content: "";
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-left: 8px;
+}
+
+.input-counter {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  font-size: 0.8rem;
+  color: #666;
+  background: white;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+.error-message {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  border-radius: 8px;
+  color: #721c24;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  max-width: 700px;
+  animation: slideIn 0.3s ease-out;
+}
+
+.error-icon {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.prompt-examples {
+  margin-top: 1rem;
+  padding: 1.5rem;
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  max-width: 700px;
+  text-align: left;
+  color: #555;
+  font-size: 0.9rem;
+  border-left: 4px solid #e8843c;
+  animation: slideIn 0.3s ease-out;
+}
+
+.prompt-examples p {
+  margin: 0 0 1rem 0;
+  line-height: 1.5;
+}
+
+.prompt-examples strong {
+  color: #333;
+}
+
+.prompt-examples ul {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+}
+
+.prompt-examples li {
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.search-tips {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #dee2e6;
+  font-style: italic;
+  color: #6c757d !important;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .main-container {
+    padding: 1rem;
+    height: 100vh;
+  }
+
+  .nav-links {
+    gap: 1rem;
+  }
+
+  .nav-links a {
+    font-size: 0.9rem;
+  }
+
+  .content h1 {
+    font-size: clamp(1.5rem, 6vw, 2.5rem);
+  }
+
+  .content p {
+    font-size: 1rem;
+  }
+
+  .prompt-input {
+    height: 120px;
+    padding: 1rem;
+    padding-right: 70px;
+    padding-bottom: 2.5rem;
+    font-size: 1rem;
+  }
+
+  .send-button {
+    right: 15px;
+    bottom: 40px;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .input-counter {
+    right: 15px;
+    bottom: 15px;
+    font-size: 0.7rem;
+  }
+
+  .prompt-examples {
+    padding: 1rem;
+    font-size: 0.8rem;
+  }
+
+  .prompt-examples ul {
+    padding-left: 1rem;
+  }
+
+  .error-message {
+    padding: 0.8rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-container {
+    padding: 0.5rem;
+  }
+
+  .prompt-input {
+    height: 100px;
+    font-size: 0.9rem;
+  }
+
+  .prompt-examples li {
+    font-size: 0.75rem;
+    margin-bottom: 0.3rem;
+  }
+}
+
+/* ============= 추가: 스크롤 트랙이 테두리를 가리는 문제 방지 ============= */
+.input-shell {
+  position: relative;
+  border-radius: 12px;
+  /* .prompt-input과 동일 */
+  overflow: hidden;
+  /* 핵심: 트랙 배경 클립 */
+  background: #fff;
+}
+
+/* 래퍼에서 테두리를 그림(시각적 테두리) */
+.input-shell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 2px solid #e8843c;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* 포커스 효과는 래퍼에서 */
+.input-shell:focus-within::before {
+  box-shadow: 0 0 0 3px rgba(232, 132, 60, 0.3);
+  border-color: #e8843c;
+}
+
+/* textarea의 테두리는 투명 처리(두께는 유지) */
+.prompt-input {
+  border-color: transparent;
+}
+
+.prompt-input:focus {
+  border-color: transparent;
+}
+
+/* 에러 시 래퍼 테두리를 빨간색으로(지원 브라우저 :has) */
+.input-shell:has(.prompt-input.error)::before {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.3);
+}
+
+/* 중앙 인터랙션 영역 컨테이너 */
+.center-interaction-area {
+  width: 100%;
+  max-width: 720px;
+  min-height: 120px; /* 높이 확보로 흔들림 방지 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0;
+  perspective: 1000px;
+}
+
+/* 페이드인 애니메이션 */
+.fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* [Step 1] 프로필 입력 카드 */
+.profile-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 2rem;
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 500px; /* 너무 넓지 않게 */
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.profile-card h3 {
+  margin: 0 0 1.5rem 0;
+  font-size: 1.2rem;
+  color: #333;
+  text-align: center;
+}
+
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-row {
+  display: flex;
+  gap: 10px;
+}
+
+.form-row input,
+.form-row select {
+  flex: 1;
+  padding: 12px 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  background: white;
+  transition: all 0.2s;
+  outline: none;
+}
+
+.form-row input:focus,
+.form-row select:focus {
+  border-color: #6c5ce7; /* 이음 메인 컬러에 맞춤 */
+  box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.1);
+}
+
+.profile-submit-btn {
+  margin-top: 0.5rem;
+  padding: 14px;
+  background: #2d3436; /* 검정/진회색 계열 (기존 Send 버튼과 유사하게) */
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.profile-submit-btn:hover {
+  background: #000;
+}
+
+/* ==========================================================================
+   [Step 1] 프로필 입력 카드 디자인 (전면 수정)
+   ========================================================================== */
+
+/* 중앙 영역 (카드 위치 잡기) */
+.center-interaction-area {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  perspective: 1000px;
+}
+
+/* 페이드인 애니메이션 */
+.fade-in {
+  animation: fadeIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 🎨 프로필 카드 본체 */
+.profile-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 480px; /* 카드의 최대 너비 설정 */
+  padding: 2.5rem 2rem; /* 내부 여백을 넉넉하게 */
+  border-radius: 20px; /* 둥근 모서리 */
+
+  /* 부드럽고 깊은 그림자 */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08), 0 4px 10px rgba(0, 0, 0, 0.03);
+
+  /* 아주 연한 테두리 */
+  border: 1px solid rgba(232, 132, 60, 0.15); /* 메인 컬러(#e8843c)를 연하게 */
+  text-align: left;
+}
+
+/* 카드 헤더 (제목 영역) */
+.profile-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.profile-header h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.profile-header p {
+  font-size: 0.9rem;
+  color: #888;
+  margin: 0;
+}
+
+/* 폼 레이아웃 (세로 정렬 핵심) */
+.profile-form-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem; /* 입력창 사이 간격 */
+}
+
+/* 개별 입력 그룹 (라벨 + 인풋) */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* 라벨 스타일 */
+.input-group label,
+.input-half label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #555;
+  margin-left: 4px;
+}
+
+/* 입력창 공통 스타일 */
+.profile-form-vertical input,
+.profile-form-vertical select {
+  width: 100%;
+  padding: 14px 16px; /* 넉넉한 높이 */
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  background-color: #fafafa; /* 아주 연한 회색 배경 */
+  font-size: 1rem;
+  color: #333;
+  transition: all 0.2s ease;
+  box-sizing: border-box; /* 패딩 포함 크기 계산 */
+}
+
+.profile-form-vertical input::placeholder {
+  color: #bbb;
+}
+
+/* 입력창 포커스 효과 (브랜드 컬러 강조) */
+.profile-form-vertical input:focus,
+.profile-form-vertical select:focus {
+  border-color: #e8843c; /* 메인 주황색 */
+  background-color: #fff;
+  box-shadow: 0 0 0 4px rgba(232, 132, 60, 0.15); /* 주황색 글로우 */
+  outline: none;
+}
+
+/* 반반 나누기 (나이/성별, 예산 등) */
+.input-group-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.input-half {
+  flex: 1; /* 1:1 비율 */
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* 완료 버튼 스타일 */
+.profile-submit-btn-large {
+  margin-top: 1rem;
+  width: 100%;
+  padding: 16px;
+  background-color: #e8843c; /* 메인 주황색 */
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 12px rgba(232, 132, 60, 0.3);
+}
+
+.profile-submit-btn-large:hover {
+  background-color: #d6732a; /* 호버 시 약간 진하게 */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(232, 132, 60, 0.4);
+}
+
+.profile-submit-btn-large:active {
+  transform: translateY(0);
+}

@@ -1,0 +1,1676 @@
+/* ===========================
+   Theme tokens
+=========================== */
+:root {
+  --bg: #f5ecd9;
+  /* 베이지 배경 */
+  --card: #ffffff;
+  /* 카드 배경 */
+  --ink: #2e2e2e;
+  /* 본문 텍스트 */
+  --muted: #7a7a7a;
+  /* 보조 텍스트 */
+  --brand: #e8843c;
+  /* 포인트 색 */
+  --brand-weak: #f3c79f;
+  /* 연한 포인트 */
+  --stroke: #eadfcd;
+  /* 테두리 */
+}
+
+/* 페이지 배경/기본 색 */
+.results-container {
+  background: var(--bg);
+  color: var(--ink);
+}
+
+/* ===========================
+   Scroll container (전체 화면 스크롤 주체)
+=========================== */
+.results-container.snap-container {
+  position: relative;
+  /* 배경 ::before 위해 */
+  isolation: isolate;
+  /* z-index 안전 */
+  width: 100vw;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  height: 100dvh;
+  /* 모바일 동적 뷰포트 */
+  overflow-y: auto;
+  /* 컨테이너가 스크롤 주체 */
+  scroll-snap-type: none;
+  /* CSS 스냅 끄고 JS로 제어 */
+  scroll-behavior: auto;
+  /* 속도는 JS로 제어 */
+  scroll-padding-top: 0;
+
+  background: transparent;
+  /* 배경은 ::before로 */
+}
+
+/* 화면 뒤 고정 배경 (SVG) */
+.results-container.snap-container::before {
+  content: "";
+  position: fixed;
+  /* 뷰포트 기준 고정 */
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  margin-top: 15%;
+
+  /* 가로=뷰포트, 세로=비율 유지 */
+  background-color: var(--bg);
+  background-image: var(--bg-img);
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}
+
+/* 각 섹션은 한 화면 */
+.snap-section {
+  height: 100vh;
+  scroll-snap-align: start;
+  /* (현재 CSS 스냅은 off지만 유지 무방) */
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  padding: 0;
+}
+
+
+/* 종합 요약 탭 전용 스타일 */
+
+.summary-tab-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* 상단 헤더 카드 */
+.summary-header-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f8faff 100%);
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 30px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.region-badge {
+  display: inline-block;
+  background: #4f46e5;
+  color: white;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+}
+
+.summary-region-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 20px;
+}
+
+.summary-region-title span {
+  color: #4f46e5;
+  border-bottom: 3px solid #c7d2fe;
+}
+
+.ai-report-box {
+  background: white;
+  border-left: 4px solid #4f46e5;
+  padding: 16px 20px;
+  border-radius: 0 8px 8px 0;
+  line-height: 1.7;
+  color: #475569;
+  font-size: 15px;
+  white-space: pre-wrap; /* 줄바꿈 유지 */
+}
+
+/* 주요 지표 그리드 */
+.summary-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.stat-item {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #f1f5f9;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.stat-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.stat-label {
+  font-size: 13px;
+  color: #64748b;
+  margin-bottom: 8px;
+}
+
+.stat-value {
+  font-size: 28px;
+  font-weight: 800;
+  color: #1e293b;
+}
+
+.stat-value span {
+  font-size: 14px;
+  margin-left: 4px;
+  color: #94a3b8;
+}
+
+.stat-desc {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #4f46e5;
+  font-weight: 600;
+}
+
+/* 하단 프리뷰 섹션 */
+.preview-sections {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.preview-column h5 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.preview-column h5 img {
+  width: 20px;
+  height: 20px;
+}
+
+.mini-card {
+  background: #f8fafc;
+  padding: 14px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #edf2f7;
+}
+
+.mini-tag {
+  font-size: 10px;
+  background: #e2e8f0;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.mini-tag.price {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.mini-card h6 {
+  margin: 8px 0 4px 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: #334155;
+}
+
+.mini-card p {
+  font-size: 12px;
+  color: #64748b;
+}
+
+
+/* 정책 탭 전체 컨테이너 */
+.policies-tab-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.policy-header {
+  border-bottom: 2px solid #f1f5f9;
+  padding-bottom: 16px;
+}
+
+.policy-count {
+  color: #4f46e5;
+  font-weight: 800;
+  margin-left: 4px;
+}
+
+.policy-subtitle {
+  font-size: 14px;
+  color: #64748b;
+  margin-top: 4px;
+}
+
+/* 정책 그리드 레이아웃 */
+.policy-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 20px;
+}
+
+/* 개별 카드 스타일 */
+.policy-card {
+  background: white;
+  border-radius: 20px;
+  border: 1px solid #e2e8f0;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.policy-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  border-color: #4f46e5;
+}
+
+/* BEST MATCH 강조 스타일 */
+.policy-card.best-match {
+  border: 2px solid #4f46e5;
+  background: linear-gradient(to bottom right, #ffffff, #f5f3ff);
+}
+
+.best-badge {
+  position: absolute;
+  top: -12px;
+  left: 20px;
+  background: #4f46e5;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 800;
+  box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
+}
+
+/* 적합도 원형 인디케이터 */
+.card-top {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.match-rate {
+  text-align: center;
+}
+
+.rate-circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, white 79%, transparent 80% 100%),
+    conic-gradient(#4f46e5 calc(var(--p) * 1%), #e2e8f0 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rate-num {
+  font-size: 13px;
+  font-weight: 800;
+  color: #4f46e5;
+}
+
+.rate-label {
+  font-size: 10px;
+  color: #94a3b8;
+  margin-top: 4px;
+  display: block;
+}
+
+/* 타이틀 섹션 */
+.policy-category {
+  font-size: 11px;
+  font-weight: 700;
+  color: #6366f1;
+  background: #eef2ff;
+  padding: 2px 8px;
+  border-radius: 6px;
+  display: inline-block;
+}
+
+.policy-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-top: 6px;
+  line-height: 1.3;
+}
+
+/* 카드 미드 (설명 및 혜택) */
+.card-mid {
+  flex-grow: 1;
+  margin-bottom: 20px;
+}
+
+.policy-desc {
+  font-size: 14px;
+  color: #64748b;
+  line-height: 1.5;
+  margin-bottom: 16px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.benefit-box {
+  background: #f8fafc;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px dashed #cbd5e1;
+}
+
+.benefit-box strong {
+  display: block;
+  font-size: 12px;
+  color: #475569;
+  margin-bottom: 4px;
+}
+
+.benefit-box p {
+  font-size: 13px;
+  color: #1e293b;
+  font-weight: 500;
+}
+
+/* 카드 바텀 (추가 정보) */
+.card-bottom {
+  border-top: 1px solid #f1f5f9;
+  padding-top: 16px;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+}
+
+.info-label {
+  color: #94a3b8;
+}
+
+.info-value {
+  color: #475569;
+  font-weight: 600;
+}
+
+/* 신청 버튼 */
+.policy-apply-btn {
+  display: block;
+  text-align: center;
+  background: #f1f5f9;
+  color: #475569;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.policy-apply-btn:hover {
+  background: #4f46e5;
+  color: white;
+}
+
+
+/* 부동산 섹션 전체 레이아웃 */
+.realestate-wrapper {
+  display: flex;
+  gap: 24px;
+  height: 700px; /* 고정 높이로 스크롤 관리 */
+  align-items: stretch;
+}
+
+/* 왼쪽 패널 스타일 */
+.properties-side-panel {
+  flex: 0 0 400px;
+  display: flex;
+  flex-direction: column;
+  background: #f8fafc;
+  border-radius: 20px;
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+}
+
+.panel-header {
+  padding: 20px;
+  background: white;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.count-badge {
+  font-size: 14px;
+  background: #4f46e5;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 10px;
+  margin-left: 6px;
+}
+
+.panel-sub {
+  font-size: 12px;
+  color: #94a3b8;
+  margin-top: 4px;
+}
+
+/* 리스트 및 카드 스타일 */
+.realestate-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.property-item-card {
+  background: white;
+  border-radius: 16px;
+  padding: 18px;
+  border: 1px solid #f1f5f9;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.property-item-card:hover {
+  border-color: #4f46e5;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+  transform: translateX(4px);
+}
+
+.item-top {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.deal-type-tag {
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.deal-type-tag.monthly { background: #ffedd5; color: #9a3412; }
+.deal-type-tag.jeonse { background: #dcfce7; color: #166534; }
+
+.location-tag {
+  font-size: 11px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.apt-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.price-info {
+  margin-bottom: 12px;
+}
+
+.main-price {
+  font-size: 20px;
+  font-weight: 800;
+  color: #4f46e5;
+}
+
+.price-unit {
+  font-size: 13px;
+  color: #94a3b8;
+  margin-left: 2px;
+}
+
+.property-specs {
+  display: flex;
+  gap: 16px;
+  border-top: 1px solid #f8fafc;
+  padding-top: 12px;
+}
+
+.spec {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.spec-label {
+  font-size: 10px;
+  color: #94a3b8;
+}
+
+.spec-value {
+  font-size: 12px;
+  font-weight: 600;
+  color: #475569;
+}
+
+.spec-value span {
+  color: #4f46e5;
+  font-size: 11px;
+}
+
+/* 오른쪽 지도 섹션 스타일 */
+.map-side-panel {
+  flex: 1;
+  position: relative;
+}
+
+.map-container-outer {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  position: relative;
+}
+
+.kakao-map-canvas {
+  width: 100%;
+  height: 100%;
+}
+
+.map-guide-overlay {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 8px 16px;
+  border-radius: 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border: 1px solid #4f46e5;
+  white-space: nowrap;
+}
+
+.map-guide-overlay p {
+  font-size: 12px;
+  font-weight: 600;
+  color: #4f46e5;
+  margin: 0;
+}
+
+/* 일자리 섹션 전체 레이아웃 */
+.jobs-tab-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  animation: slideUp 0.4s ease-out;
+}
+
+/* 통계 보드 스타일 */
+.jobs-stats-board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  background: #f1f5f9;
+  padding: 20px;
+  border-radius: 16px;
+}
+
+.stat-card {
+  background: white;
+  padding: 16px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-card .label {
+  font-size: 12px;
+  color: #64748b;
+  margin-bottom: 4px;
+}
+
+.stat-card .value {
+  font-size: 24px;
+  font-weight: 800;
+  color: #4f46e5;
+}
+
+.stat-card .value span {
+  font-size: 14px;
+  color: #94a3b8;
+  margin-left: 2px;
+}
+
+.stat-card .value-text {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+/* 헤더 부분 */
+.jobs-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 4px;
+}
+
+.jobs-header h4 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.jobs-filter-info {
+  font-size: 13px;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+/* 공고 카드 그리드 */
+.jobs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 20px;
+}
+
+.job-post-card {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.job-post-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.08);
+  border-color: #4f46e5;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.inst-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #64748b;
+  max-width: 70%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.d-day-badge {
+  background: #f1f5f9;
+  color: #475569;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.d-day-badge.urgent {
+  background: #fee2e2;
+  color: #dc2626;
+  animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0.6; }
+}
+
+.job-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: #1e293b;
+  line-height: 1.4;
+  margin-bottom: 16px;
+  height: 48px; /* 2줄 고정 */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* 태그 스타일 */
+.job-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+
+.tag {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+
+.tag.type { background: #eef2ff; color: #4f46e5; }
+.tag.career { background: #f0fdf4; color: #16a34a; }
+.tag.edu { background: #fff7ed; color: #ea580c; }
+
+/* 하단 정보 섹션 */
+.job-info-footer {
+  border-top: 1px solid #f1f5f9;
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #64748b;
+}
+
+.info-item .icon {
+  font-size: 14px;
+}
+
+/* 지원 링크 버튼 */
+.apply-link {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #f8fafc;
+  color: #1e293b;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.apply-link:hover {
+  background: #4f46e5;
+  color: white;
+}
+
+.apply-link svg {
+  transition: transform 0.2s;
+}
+
+.apply-link:hover svg {
+  transform: translateX(4px);
+}
+
+
+/* ===========================
+   Hero(탐색결과)
+=========================== */
+.hero-section .hero-wrap {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 32px 24px;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: clamp(2rem, 3.6vw, 3rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  margin: 0.25rem 0 0.5rem;
+}
+
+.hero-sub {
+  color: #9a9083;
+  line-height: 1.45;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.hero-prompt {
+  font-size: 30px;
+}
+
+/* 뒤로가기 버튼(상단 필요시) */
+.back-button {
+  padding: 10px 16px;
+  border-radius: 10px;
+  background: #e1b186;
+  color: #fff;
+  font-weight: 800;
+  border: none;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.07);
+  cursor: pointer;
+}
+
+/* ===========================
+[수정됨]
+  AI
+  브리핑
+  카드
+  (사이즈 대폭 확대)
+  ===========================
+  */
+.briefing-card {
+  margin: 40px auto 30px; /* 위아래 간격도 조금 늘림 */
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 28px; /* 둥근 모서리도 조금 더 크게 */
+  padding: 0;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.03);
+
+  /* ✅ [중요] 가로 너비 확대 */
+  max-width: 1000px;
+  width: 95%; /* 모바일 대응 */
+
+  overflow: hidden;
+  position: relative;
+  text-align: left;
+}
+
+/* 1. 상단 통계 행 (여백 대폭 추가) */
+.briefing-stats-row {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 40px 50px; /* ✅ 내부 여백 대폭 확대 */
+  background: #fff;
+}
+
+.stat-box {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* ✅ 아이콘과 글자 사이 간격 늘림 */
+}
+
+/* ✅ 아이콘 크기 확대 */
+.icon-wrapper {
+  width: 72px; /* 기존 48px -> 72px */
+  height: 72px;
+  border-radius: 20px; /* 둥글기도 조정 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f9fa;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* 입체감 추가 */
+}
+
+.icon-wrapper img {
+  width: 40px; /* 기존 26px -> 40px */
+  height: 40px;
+  opacity: 0.95;
+}
+
+/* 아이콘별 배경색 */
+.icon-wrapper.job {
+  background: #fff4e6;
+}
+.icon-wrapper.house {
+  background: #e3f2fd;
+}
+.icon-wrapper.policy {
+  background: #e8f5e9;
+}
+
+.stat-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* ✅ 라벨(항목명) 크기 확대 */
+.stat-text .label {
+  font-size: 1.1rem; /* 기존 0.85rem -> 1.1rem */
+  color: #888;
+  font-weight: 700; /* 좀 더 굵게 */
+  margin-bottom: 4px;
+}
+
+/* ✅ 숫자(건수) 크기 대폭 확대 */
+.stat-text .count {
+  font-size: 2.2rem; /* 기존 1.4rem -> 2.2rem (아주 큼) */
+  font-weight: 800;
+  color: #2c3e50;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+/* 구분선 */
+.stat-divider {
+  width: 1px;
+  height: 60px; /* 구분선도 길게 */
+  background: #e0e0e0;
+}
+
+/* 2. 하단 LLM 설명 영역 */
+.briefing-content {
+  background: #fdfaf6;
+  padding: 36px 50px; /* ✅ 텍스트 영역 여백도 확대 */
+  border-top: 1px solid #f0eee6;
+}
+
+.ai-badge-row {
+  margin-bottom: 16px;
+}
+
+.ai-badge-pill {
+  background: linear-gradient(135deg, #646cff, #8f94fb);
+  color: white;
+  padding: 8px 18px; /* 배지 크기도 살짝 키움 */
+  border-radius: 24px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  box-shadow: 0 4px 10px rgba(100, 108, 255, 0.25);
+  display: inline-block;
+}
+
+/* ✅ 분석 리포트 글 (요청대로 크기 유지) */
+.ai-description {
+  font-size: 1.15rem; /* 기존 유지 */
+  line-height: 1.7;
+  color: #4a4a4a;
+  margin: 0;
+  font-weight: 500;
+  word-break: keep-all;
+}
+
+/* 모바일 대응 (화면 작을 때 깨지지 않도록) */
+@media (max-width: 768px) {
+  .briefing-stats-row {
+    display: grid;
+    grid-template-columns: 1fr; /* 모바일에서는 세로로 한 줄씩 */
+    gap: 24px;
+    padding: 30px 20px;
+    text-align: center;
+  }
+
+  .stat-divider {
+    display: none;
+  }
+
+  .stat-box {
+    flex-direction: row; /* 아이콘-텍스트 가로 배치 유지 */
+    justify-content: center; /* 가운데 정렬 */
+    text-align: left;
+  }
+
+  /* 모바일에서도 아이콘은 적당히 큼 */
+  .icon-wrapper {
+    width: 60px;
+    height: 60px;
+  }
+  .icon-wrapper img {
+    width: 32px;
+    height: 32px;
+  }
+  .stat-text .count {
+    font-size: 1.8rem;
+  }
+
+  .briefing-content {
+    padding: 24px;
+  }
+}
+
+/* ===========================
+   아래로 스크롤 힌트
+=========================== */
+.scroll-hint {
+  display: flex;
+  flex-direction: column;
+  /* 텍스트 위 / 화살표 아래 */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 8px;
+  margin: 18px auto 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+
+  font-size: 1.5rem;
+  /* 문구 크게 */
+  font-weight: 700;
+  color: #b1a496;
+}
+
+.scroll-hint img {
+  width: 36px;
+  height: 36px;
+  /* 화살표 크게 */
+  display: block;
+  opacity: 0.95;
+  transition: transform 0.15s ease;
+}
+
+.scroll-hint:hover img {
+  transform: translateY(4px);
+}
+
+/* ===========================
+   분석결과 섹션 (내부 스크롤)
+=========================== */
+.analysis-section {
+  width: 100%;
+}
+
+.analysis-section .analysis-inner {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 24px 24px;
+
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  /* flex overflow 방지 */
+}
+
+.analysis-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  margin: 0.25rem 0 0.6rem;
+}
+
+/* 탭 컨테이너: 세로 플렉스 */
+.tabs-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+/* 탭 헤더/버튼 */
+.tabs-header {
+  flex: 0 0 auto;
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid var(--stroke);
+  border-bottom: none;
+  border-radius: 12px 12px 0 0;
+  padding: 8px 8px;
+  /* 4px → 8px */
+  display: flex;
+  gap: 8px;
+  /* 4px → 8px */
+}
+
+.tab-button {
+  background: transparent;
+  border: none;
+  padding: 0.9rem 1.25rem;
+  /* .7rem 1.1rem → 0.9rem 1.25rem */
+  font-weight: 700;
+  font-size: 1.06rem;
+  color: #6b5b45;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.tab-button.active {
+  background: #fff6ea;
+  color: var(--brand);
+  box-shadow: 0 2px 6px rgba(232, 132, 60, 0.18) inset;
+  border: 1px solid var(--brand-weak);
+}
+
+/* 내부 스크롤 영역 */
+.tab-content {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  background: var(--card);
+  border: 1px solid var(--stroke);
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  padding: 20px;
+  padding-bottom: max(24px, env(safe-area-inset-bottom));
+  /* 하단 잘림 방지 */
+  box-sizing: border-box;
+  overscroll-behavior: contain;
+  /* 부모로 이벤트 전파 방지 */
+}
+
+/* ===========================
+   공통 카드/리스트
+=========================== */
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.9rem;
+  margin: 1rem 0 1.2rem;
+}
+
+.summary-card {
+  background: #fff7ee;
+  border: 1px solid var(--stroke);
+  border-radius: 12px;
+  text-align: center;
+  padding: 1rem 0.75rem;
+}
+
+.summary-card h3 {
+  color: var(--brand);
+  margin: 0 0 0.25rem;
+}
+
+.summary-card p {
+  margin: 0;
+  color: #6b5b45;
+  font-weight: 700;
+}
+
+.section-title {
+  margin: 0.25rem 0 0.75rem;
+  font-weight: 800;
+}
+
+.section-subtitle {
+  margin: 0.5rem 0 0.5rem;
+  font-weight: 800;
+}
+
+.data-list {
+  margin-top: 0.5rem;
+}
+
+.data-item {
+  background: #fff;
+  border: 1px solid var(--stroke);
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 0.7rem;
+}
+
+.data-item h4 {
+  margin: 0 0 0.4rem;
+}
+
+.data-item p {
+  margin: 0.2rem 0;
+  color: #4a3d2c;
+}
+
+/* 상태 메시지 */
+.no-data,
+.error-state,
+.loading-state {
+  text-align: center;
+  color: var(--muted);
+  padding: 2rem 1rem;
+}
+
+.error-state {
+  color: #c0392b;
+}
+
+/* ===========================
+   반응형
+=========================== */
+@media (max-width: 900px) {
+  .briefing-card {
+    grid-template-columns: 1fr;
+    /* 지도 아래로 */
+    max-width: 640px;
+  }
+
+  .briefing-map img {
+    max-width: 420px;
+    max-height: 280px;
+  }
+
+  .tabs-header {
+    padding: 6px;
+    gap: 6px;
+  }
+
+  .tab-button {
+    font-size: 1rem;
+    padding: 0.8rem 1.1rem;
+  }
+}
+
+/* ===========================
+   Floating "New Chat" Button (우측 하단 고정)
+=========================== */
+.newchat-fab {
+  position: fixed;
+  right: clamp(16px, 2vw, 24px);
+  bottom: max(16px, env(safe-area-inset-bottom));
+  /* iOS 홈바 회피 */
+  z-index: 9999;
+
+  padding: 12px 18px;
+  border-radius: 9999px;
+  /* pill */
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  background: #ff8d33;
+  /* 요청 색상 */
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.95rem;
+  letter-spacing: 0.2px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  transition: transform 0.12s ease, filter 0.12s ease, box-shadow 0.12s ease;
+}
+
+.newchat-fab:hover {
+  filter: brightness(0.98);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.16);
+}
+
+.newchat-fab:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.newchat-fab:focus-visible {
+  outline: 3px solid rgba(255, 141, 51, 0.45);
+  outline-offset: 2px;
+}
+
+/* 부동산 탭: 실거래 목록 hover 효과 */
+.properties-list .data-item {
+  transition: transform 0.14s cubic-bezier(0.22, 0.61, 0.36, 1),
+    box-shadow 0.14s ease, border-color 0.14s ease, background-color 0.14s ease;
+  will-change: transform;
+  cursor: pointer;
+  /* 손가락 커서 */
+}
+
+.properties-list .data-item:hover {
+  transform: translateY(-2px) scale(1.015);
+  /* 앞으로 툭 */
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
+  border-color: var(--brand-weak);
+  background-color: #fff;
+}
+
+.properties-list .data-item:active {
+  transform: translateY(0) scale(0.997);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.properties-list .data-item:focus-visible {
+  outline: 3px solid rgba(232, 132, 60, 0.35);
+  outline-offset: 2px;
+}
+
+/* 카카오맵 영역에서 스크롤 체이닝 방지 */
+.kakao-map {
+  overscroll-behavior: contain;
+  /* wheel/touch 끝났을 때 부모로 안 퍼짐 */
+}
+
+/* ===== AI 패널 공통 ===== */
+.ai-panel {
+  background: var(--card);
+  border: 1px solid var(--stroke);
+  border-radius: 12px;
+  padding: 18px;
+  margin: 12px 0 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.ai-panel__title {
+  margin: 0 0 12px;
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--brand);
+}
+
+/* 추천/인사이트 톤 분리(부담스럽지 않게) */
+.ai-panel--recommend {
+  border-left: 4px solid var(--brand);
+  background: #fffaf3;
+}
+
+.ai-panel--insights {
+  border-left: 4px solid #e8843c;
+  background: #fffaf3;
+}
+
+/* 섹션/배지 */
+.ai-section {
+  margin-top: 12px;
+}
+
+.ai-section__title {
+  margin: 0 0 8px;
+  font-weight: 800;
+  color: #6b5b45;
+  font-size: 1rem;
+}
+
+.ai-section__title--warn {
+  color: #b05b00;
+}
+
+.ai-section__title--ok {
+  color: #2f7a2f;
+}
+
+.ai-badge {
+  display: inline-block;
+  margin-right: 8px;
+  padding: 2px 8px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--brand);
+  background: #fff6ea;
+  border: 1px solid var(--brand-weak);
+  border-radius: 999px;
+}
+
+/* 추천 카드 리스트 */
+.ai-reco-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 10px;
+}
+
+/* 추천 카드 = 기존 data-item 톤과 맞춤 */
+.ai-card {
+  background: #fff;
+  border: 1px solid var(--stroke);
+  border-radius: 12px;
+  padding: 12px;
+  transition: transform 0.14s cubic-bezier(0.22, 0.61, 0.36, 1),
+    box-shadow 0.14s ease, border-color 0.14s ease;
+}
+
+.ai-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.08);
+  border-color: var(--brand-weak);
+}
+
+.ai-card__title {
+  margin: 0 0 6px;
+  font-size: 1rem;
+  color: #2d261e;
+}
+
+.ai-card__line {
+  margin: 4px 0;
+  color: #4a3d2c;
+}
+
+.ai-card__line strong {
+  display: inline-block;
+  min-width: 84px;
+  color: #6b5b45;
+}
+
+/* 노트(문단) */
+.ai-note {
+  background: #fff;
+  border: 1px solid var(--stroke);
+  border-radius: 10px;
+  padding: 12px;
+  line-height: 1.5;
+  color: #3b342b;
+}
+
+.ai-note--warn {
+  background: #fff4e3;
+  border-color: #f3c79f;
+}
+
+.ai-note--ok {
+  background: #eef8ee;
+  border-color: #bfe3bf;
+}
+
+/* 인사이트 기본 그리드 (기본은 auto-fit) */
+.ai-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.ai-info-card {
+  background: #fff;
+  border: 1px solid var(--stroke);
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.ai-info-card h6 {
+  margin: 0 0 6px;
+  font-weight: 800;
+  color: #6b5b45;
+  font-size: 1rem;
+}
+
+/* === AI 인사이트: 2x2 고정 + 타이포 업(해당 패널에만 적용) === */
+.ai-panel--insights .ai-grid {
+  grid-template-columns: repeat(2, minmax(280px, 1fr));
+  /* 항상 2열 → 2x2 */
+  gap: 16px 18px;
+  align-items: stretch;
+}
+
+@media (max-width: 900px) {
+  .ai-panel--insights .ai-grid {
+    grid-template-columns: 1fr;
+    /* 모바일 1열 */
+  }
+}
+
+.ai-panel--insights .ai-info-card {
+  min-height: 132px;
+  /* 카드 높이 살짝 보장 */
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+.ai-panel--insights .ai-info-card h6 {
+  margin: 0 0 10px;
+  font-weight: 800;
+  font-size: clamp(1.05rem, 1.2vw, 1.2rem);
+  /* 제목 조금 크게 */
+  letter-spacing: -0.01em;
+}
+
+.ai-panel--insights .ai-info-card p {
+  margin: 0;
+  color: #2d261e;
+  font-weight: 650;
+  /* 본문 살짝 굵게 */
+  font-size: clamp(1rem, 1.15vw, 1.1rem);
+  /* 본문 약간 크게 */
+  line-height: 1.55;
+}
+
+/* 인사이트 하이라이트 */
+.ai-highlight {
+  margin-top: 12px;
+  text-align: center;
+  background: #fff;
+  border: 1px solid var(--stroke);
+  border-radius: 12px;
+  padding: 10px 12px;
+}
+
+.ai-highlight strong {
+  display: block;
+  color: var(--brand);
+  margin-bottom: 4px;
+}
+
+.ai-highlight span {
+  font-size: 0.92rem;
+  color: #666;
+}
+
+/* 디버그 박스도 톤 맞추기 */
+.ai-debug {
+  background: #fff7f7;
+  border: 1px solid #f1b5b5;
+  border-radius: 12px;
+  padding: 14px;
+  margin: 12px 0 16px;
+}
+
+.ai-debug h5 {
+  margin: 0 0 8px;
+  color: #b03030;
+}
+
+.ai-debug__list {
+  margin: 0 0 6px 18px;
+  color: #5a4e43;
+}
+
+.ai-debug__details summary {
+  cursor: pointer;
+  color: #1976d2;
+}
+
+.ai-debug__details pre {
+  margin: 6px 0 0;
+  font-size: 0.78rem;
+  background: #fff;
+  border: 1px solid var(--stroke);
+  border-radius: 8px;
+  padding: 10px;
+  max-height: 220px;
+  overflow: auto;
+}
+
+.ai-info-card p {
+  font-size: 1.2rem;
+  /* 기존보다 8~12% 정도 감소 느낌 */
+  line-height: 1.4;
+  /* 줄간격은 읽기 좋게 유지 */
+}
+
+/* 그리드 박스 간격도 아주 살짝만 줄여서 전체 볼륨 다운 */
+.ai-grid {
+  gap: 10px;
+  /* 기존 12px → 10px */
+}
+
+/* src/components/ResultsPage.css 맨 아래 추가 */
+
+/* 왼쪽 상단 뒤로 가기 버튼 */
+.back-fab {
+  position: fixed;
+  top: 2rem;
+  left: 2rem; /* 왼쪽 배치 */
+  z-index: 1000;
+  padding: 0.8rem 1.2rem;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #e5e7eb;
+  color: #4b5563;
+  font-weight: 600;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(8px);
+}
+
+.back-fab:hover {
+  background: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  color: #2563eb; /* 호버 시 파란색 강조 */
+}
+
+/* 모바일 대응 */
+@media (max-width: 768px) {
+  .back-fab {
+    top: 1rem;
+    left: 1rem;
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* ======================================================
+   [최종 수정] 페이지 진입 애니메이션 (추천 페이지와 동일)
+   ====================================================== */
+
+/* 1. 슬라이드 업 애니메이션 정의 (추천 페이지 설정값 그대로) */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px); /* 20px 아래에서 시작 */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0); /* 원래 위치로 */
+  }
+}
+
+/* 2. 요소별 시간차 적용 (Waterfall 효과) */
+
+/* (1) 최상단 제목과 설명 부분 */
+.hero-wrap > h1,
+.hero-wrap > p {
+  opacity: 0; /* 초기엔 안 보임 */
+  animation: slideUp 0.8s ease-out forwards;
+}
+
+/* (2) AI 브리핑 카드 (제목보다 0.2초 늦게) */
+.briefing-card {
+  opacity: 0;
+  animation: slideUp 0.8s ease-out 0.2s forwards;
+}
+
+/* (3) 스크롤 힌트 화살표 (카드보다 0.2초 늦게) */
+.scroll-hint {
+  opacity: 0;
+  animation: slideUp 0.8s ease-out 0.4s forwards;
+}
+
+/* (4) 하단 상세 분석 탭 영역 (가장 늦게) */
+.analysis-section {
+  opacity: 0;
+  animation: slideUp 0.8s ease-out 0.5s forwards;
+}

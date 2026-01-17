@@ -1,0 +1,155 @@
+/* src/components/RecommendationPage.css */
+
+.recommendation-container {
+  padding: 40px 20px;
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  font-family: "Pretendard", sans-serif;
+  animation: fadeIn 0.8s ease-out;
+}
+
+.recommendation-header h1 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.recommendation-header p {
+  color: #666;
+  margin-bottom: 40px;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+  opacity: 0;
+  animation: slideUp 0.8s ease-out 0.3s forwards;
+}
+
+.region-card {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #eee;
+  text-align: left;
+}
+
+.region-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  border-color: #646cff;
+}
+
+.rank-badge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #646cff;
+  color: white;
+  padding: 6px 14px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  border-bottom-right-radius: 16px;
+}
+
+.region-name {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.region-name h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #2c3e50;
+}
+
+.region-code {
+  font-size: 0.8rem;
+  color: #999;
+}
+
+.stats-preview {
+  display: flex;
+  justify-content: space-around;
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-item .label {
+  font-size: 0.8rem;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+.stat-item .value {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.stat-item .value.highlight {
+  color: #333;
+}
+
+.card-footer {
+  font-size: 0.85rem;
+  color: #888;
+  text-align: center;
+  margin-top: 10px;
+  font-weight: 500;
+}
+
+/* 애니메이션 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stats-preview {
+  display: flex;
+  justify-content: space-around; /* 3개 균등 배치 */
+  align-items: center;
+  background: #f8f9fa;
+  padding: 15px 10px; /* 좌우 패딩을 조금 줄임 */
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+/* 새로 추가한 구분선 (필요하면 사용) */
+.stat-divider-vertical {
+  width: 1px;
+  height: 50px;
+  background: #ddd;
+}
